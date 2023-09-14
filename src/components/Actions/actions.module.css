@@ -1,0 +1,43 @@
+.actionsWrapper {
+    padding-top: 30px;
+}
+
+.actionsWrapper[data-is-open="true"] {
+    background-color: red;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+.textarea {
+    height: 120px;
+    border: none;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    padding: 12px 10px;
+}
+
+.form button {
+    width: 150px;
+}
+
+.comments {
+    margin-bottom: 20px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 25px;
+    font-size: 23px;
+}
+
+.edit:hover, .delete:hover {
+    color: #555;
+    cursor: pointer;
+}

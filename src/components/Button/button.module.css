@@ -1,0 +1,36 @@
+.button {
+    position: relative;
+    appearance: none;
+    background: #054077;
+    padding: 10px 12px;
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    border-radius: 6px;
+}
+.button::before {
+    --size: 0;
+
+    content: '';
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--size);
+    height: var(--size);
+    background: radial-gradient(circle closest-side, #000736, transparent);
+    transform: translate(-50%, -50%);
+    transition: width .2s ease, height .2s ease;
+}
+  
+.button:hover::before {
+--size: 400px;
+}
+
+span {
+position: relative;
+pointer-events: none;
+}

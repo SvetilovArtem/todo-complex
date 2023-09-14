@@ -1,0 +1,64 @@
+.sidebar {
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 6px;
+    min-height: 300px;
+    padding: 20px 0;
+}
+
+.option {
+    font-size: 24px;
+    line-height: 29px;
+    padding: 10px 20px 10px 20px;
+    cursor: pointer;
+    position: relative;
+    z-index: 5;
+    background-color: transparent;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
+.option::before {
+    position: absolute;
+    z-index: 0;
+    content: '';
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: width 275ms ease;
+    height: 100%;
+    width: 0;
+    white-space: nowrap;
+}
+
+.option:hover::before {
+    width: 100%;
+}
+
+.option[data-is-selected="true"]:hover::before {
+    width: 0;
+}
+
+.selected {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.count {
+    position: relative;
+    font-size: 13px;
+    font-weight: 300;
+    z-index: 5;
+}
+
+.count::after {
+    position: absolute;
+    left: calc(50% - 16px);
+    top: calc(50% - 16px);
+    content: '';
+    width: 32px;
+    height: 32px;
+    background-color: rgb(252, 170, 170);
+    z-index: -1;
+    border-radius: 50%;
+}

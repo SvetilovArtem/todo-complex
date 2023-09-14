@@ -1,0 +1,67 @@
+.modal_box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    z-index: -5; 
+  }
+  .modal {
+    background-color: white;
+    padding: 25px 10px;
+    width: 350px;
+    height: 175px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform: scale(0);
+    opacity: 0;
+    transition: all .4s ease;
+    .btn_close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 24px;
+        height: 24px;
+        z-index: 10;
+        .symbol {
+          position: relative;
+          cursor: pointer;
+          &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc(50% - 1.5px);
+            width: 3px;
+            height: 24px;
+            background-color: #C4C4C4;
+            transform: rotate(45deg);
+          }
+          &::before {
+            content: '';
+            position: absolute;
+            top: calc(50% + 10px);
+            left: calc(50% - 12px);
+            width: 24px;
+            height: 3px;
+            background-color: #C4C4C4;
+            transform: rotate(45deg);
+          }
+        }
+      }
+  }
+  .active {
+    transform: scale(1);
+    opacity: 1;
+    z-index: 20;
+  }
+  

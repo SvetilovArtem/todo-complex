@@ -1,0 +1,97 @@
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateX(-120%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-120%);
+    }
+}
+
+.task {
+    padding: 20px 10px;
+    background-color: rgba(255, 255, 255, 0.75);
+    color: #333;
+    font-weight: 300;
+    border-radius: 6px;
+}
+
+.exitActive {
+    animation: fade-out 500ms forwards;
+}
+
+.exit {
+    animation: fade-out 500ms forwards;
+}
+
+.enterActive {
+    animation: fade-in 500ms forwards;
+}
+
+.preview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.titleWrapper {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+}
+.titleWrapper input {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.arrowsDown {
+    font-size: 38px;
+    cursor: pointer;
+}
+
+.arrowsDown:hover {
+    color: red;
+}
+
+.modalTitle {
+    margin-bottom: 25px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.deleteBtn, .cancelBtn {
+    padding: 20px 10px;
+    font-size: 18px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.deleteBtn {
+    background-color: rgb(239, 95, 95);
+}
+.deleteBtn:hover {
+    background-color: #000;
+}
+
+.cancelBtn {
+    background-color: transparent;
+    color: #888;
+}
+.cancelBtn:hover {
+    background-color: #000;
+    color: #fff;
+}

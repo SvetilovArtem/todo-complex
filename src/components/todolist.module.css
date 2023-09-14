@@ -1,0 +1,18 @@
+.todolist {
+    margin: 120px auto;
+    height: 100vh;
+}
+
+.content {
+    display: grid;
+    align-items: flex-start;
+    grid-template-columns: 0.35fr 0.65fr;
+    gap: 30px;
+    padding-top: 80px;
+}
+
+.empty {
+    color: #fff;
+    height: 100%;
+    
+}
