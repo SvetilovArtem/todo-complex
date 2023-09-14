@@ -47,7 +47,7 @@ const Actions = ({task, isOpen, onEdit, onDelete, setHeight}: PropsType) => {
             <Button onClick={addCommentHandler}/>
         </form>
         <ul className={styles.comments}>
-            {task.comments?.map(comm => <div>{comm.author}: {comm.text}</div>) || 'Нет комментариев'}
+            {task.comments.length ? task.comments?.map(comm => <li className={styles.comment}>{comm.createdDate} <br /> {comm.author}: {comm.text}</li>) : <div>Нет комментариев</div>}
         </ul>
         <div className={styles.actions}>
             <div className={styles.delete + ' ' + "material-symbols-outlined"} onClick={() => onDelete(task.id)}>
