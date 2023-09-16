@@ -23,6 +23,12 @@ const Actions = ({task, isOpen, onEdit, onDelete, setHeight}: PropsType) => {
     const [text, setText] = useState('')
     const addComment = useTodos(state => state.addComment)
 
+    moment.locale('ru')
+
+    const fromNow = moment(task.deadline, 'DD/MM/YYYY hh:mm').endOf('minutes').fromNow()
+    const fromNowClass = moment(task.deadline, 'DD/MM/YYYY hh:mm').fromNow().includes('ago') 
+    ? styles.fromNowErr : styles.fromNow
+
     const addCommentHandler = (e: any) => {
         e.preventDefault()
         const newComment: CommentType = {
@@ -37,15 +43,19 @@ const Actions = ({task, isOpen, onEdit, onDelete, setHeight}: PropsType) => {
     
   return (
     <div id='actionsWrapper' className={styles.actionsWrapper}>
-        <form className={styles.form}>
-            <textarea 
-                value={text} 
-                onChange={e => setText(e.target.value)}
-                className={styles.textarea} 
-                placeholder='Комментарий'
-            ></textarea>
-            <Button onClick={addCommentHandler}/>
-        </form>
+        <div className={styles.formWrapper}>
+            <form className={styles.form}>
+                <textarea 
+                    value={text} 
+                    onChange={e => setText(e.target.value)}
+                    className={styles.textarea} 
+                    placeholder='Комментарий'
+                ></textarea>
+                <Button onClick={addCommentHandler}/>
+            </form>
+            <span className={fromNowClass}>{fromNow}</span>
+        </div>
+
         <ul className={styles.comments}>
             {task.comments.length ? task.comments?.map(comm => <li className={styles.comment}>{comm.createdDate} <br /> {comm.author}: {comm.text}</li>) : <div>Нет комментариев</div>}
         </ul>

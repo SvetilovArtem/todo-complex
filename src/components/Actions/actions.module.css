@@ -6,6 +6,26 @@
     background-color: red;
 }
 
+.formWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fromNow, .fromNowErr {
+    font-size: 14px;
+    padding: 5px 8px;
+    border-radius: 2px;
+    height: 29px;
+    margin-right: 30px;
+}
+.fromNow {
+    background-color: rgb(176, 245, 176);
+}
+
+.fromNowErr {
+    background-color: rgb(245, 141, 141);
+}
+
 .form {
     display: flex;
     flex-direction: column;

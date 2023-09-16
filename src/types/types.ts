@@ -4,6 +4,7 @@ export type TaskType = {
     isDone: boolean,
     category: OptionType,
     createdAt: string,
+    deadline?: string,
     comments: CommentType[]
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
 import { TaskType } from '../../types/types'
@@ -32,11 +32,6 @@ const Task = ({ task, onChangeCompleted, onDelete}: IProps) => {
     onDelete(task.id) 
   }
 
-  useEffect(() => {
-    console.log(task)
-  }, [])
-
-
   return (
     <CSSTransition 
       classNames={{
@@ -51,7 +46,7 @@ const Task = ({ task, onChangeCompleted, onDelete}: IProps) => {
         <div className={styles.preview}>
           <div className={styles.titleWrapper}>
             <input type='checkbox' checked={isDone} onChange={() => onChangeCompleted(task)} />
-            <span>{title}</span>
+            <span className={styles.title}>{title}</span>
           </div>
           <div 
             className={styles.arrowsDown + ' ' + "material-symbols-outlined"} 

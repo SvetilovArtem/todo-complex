@@ -12,16 +12,27 @@ import Select from '../Select/Select'
 
 
 import styles from './addForm.module.css'
+import DateField from '../TextField/DateField'
 
 const AddForm = () => {
+
     const addTodo = useTodos(state => state.addTodo)
     const [todoValue, setTodoValue] = useState<string>('')
+    const [deadline, setDeadline] = useState('')
     const [selected, onChange] = useState(categoies[1])
 
     const addTodoHandler = (e:any) => {
       e.preventDefault()
-      const time = moment().format('MMMM Do YYYY, h:mm:ss a')
-      const newTask = {id: v1(), title: todoValue, isDone: false, category: selected, createdAt: time, comments: []}
+      const time = moment().format('DD/MM/YYYY hh:mm')
+      const newTask = {
+        id: v1(), 
+        title: todoValue, 
+        isDone: false, 
+        category: selected, 
+        createdAt: time, 
+        deadline: deadline,
+        comments: [],
+      }
       addTodo(newTask)
     }
 
@@ -45,6 +56,15 @@ const AddForm = () => {
           onChange={onChange} 
           onClose={() => {}} 
         />
+        <DateField
+          id='deadline' 
+          label={'Крайний срок'} 
+          required={false} 
+          value={deadline} 
+          setValue={setDeadline} 
+          error='' 
+        />
+
         <Button onClick={addTodoHandler} />
     </form>
   )

@@ -7,6 +7,7 @@
     display: grid;
     align-items: flex-start;
     grid-template-columns: 0.35fr 0.65fr;
+    grid-template-rows: 1fr;
     gap: 30px;
     padding-top: 80px;
 }

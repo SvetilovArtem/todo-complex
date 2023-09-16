@@ -29,7 +29,7 @@ const TodoList = () => {
             selected={selected} 
             onChange={onChangeFilter} 
           />
-          {countItems > 0 ? <Tasks tasks={tasks} filter={selected} /> : <div className={styles.empty}>В этой категории нет записей</div>}
+          <Tasks tasks={tasks} filter={selected} />
         </div>
       </div>
     </div>
