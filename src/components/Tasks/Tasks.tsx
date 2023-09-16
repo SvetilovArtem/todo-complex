@@ -6,6 +6,7 @@ import Task from './Task'
 
 import styles from './tasks.module.css'
 import { OptionType, TaskType } from '../../types/types'
+import { countItemsCalculate } from '../../helpers/countItemsCalculate'
 
 type PropsType = {
   filter: OptionType,
@@ -16,6 +17,8 @@ const Tasks = ({ tasks, filter }: PropsType) => {
 
   const toggleCompleted = useTodos(state => state.toggleCompleted)
   const onDelete = useTodos(state => state.onDelete)
+
+  const count = countItemsCalculate(tasks, filter)
   
   return (
     <TransitionGroup className={styles.tasks}>
@@ -31,6 +34,7 @@ const Tasks = ({ tasks, filter }: PropsType) => {
               <Task key={task.id} task={task} onChangeCompleted={toggleCompleted} onDelete={onDelete} />
             )
           }
+          {!count && <span>Нет записей</span>}
       </ul>
     </TransitionGroup>
   )

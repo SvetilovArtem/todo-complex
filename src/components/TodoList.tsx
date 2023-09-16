@@ -15,7 +15,6 @@ import { OptionType } from '../types/types'
 const TodoList = () => {
   const tasks = useTodos(state => state.todos)
   const [selected, onChangeFilter] = useState<OptionType>(categoies[0])
-  const [countItems, setCountItems] = useState(0)
 
   return (
     <div className="container">
@@ -23,8 +22,6 @@ const TodoList = () => {
         <AddForm />
         <div className={styles.content}>
           <Sidebar 
-            countItems={countItems}
-            setCountItems={setCountItems}
             items={categoies} 
             selected={selected} 
             onChange={onChangeFilter} 

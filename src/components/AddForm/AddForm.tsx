@@ -13,8 +13,11 @@ import Select from '../Select/Select'
 
 import styles from './addForm.module.css'
 import DateField from '../TextField/DateField'
+import { useForm } from 'react-hook-form'
 
 const AddForm = () => {
+
+  const {register, handleSubmit, formState: { errors }} = useForm()
 
     const addTodo = useTodos(state => state.addTodo)
     const [todoValue, setTodoValue] = useState<string>('')
@@ -33,11 +36,12 @@ const AddForm = () => {
         deadline: deadline,
         comments: [],
       }
+      console.log(errors)
       addTodo(newTask)
     }
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleSubmit(addTodoHandler)}>
         <TextField 
           id='task' 
           className='field' 
@@ -62,7 +66,8 @@ const AddForm = () => {
           required={false} 
           value={deadline} 
           setValue={setDeadline} 
-          error='' 
+          error={errors.date && (errors.date?.message || 'Error!')} 
+          register={register}
         />
 
         <Button onClick={addTodoHandler} />

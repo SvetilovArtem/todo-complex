@@ -1,16 +1,18 @@
 import React, { ChangeEventHandler } from 'react'
 import MaskedInput from 'react-input-mask';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 import styles from './textField.module.css'
 import moment from 'moment';
 
 type PropsType = {
     id: string,
-    error: string,
+    error: any,
     label: string,
     required: boolean,
     value: string,
-    setValue: (str: string) => void
+    setValue: (str: string) => void,
+    register: UseFormRegister<FieldValues>
 }
 
 const DateField = ({
@@ -19,7 +21,8 @@ const DateField = ({
     label, 
     required, 
     value, 
-    setValue}: PropsType) => {
+    setValue,
+    register}: PropsType) => {
 
     const onChangeValue: ChangeEventHandler<HTMLInputElement> = (e) => {
         setValue(e.target.value)
@@ -34,10 +37,26 @@ const DateField = ({
             required && <span className={styles.inputReq}>Required</span>
         }
         <MaskedInput
+            {...register("date", {
+                required: {
+                    value: true,
+                    message: 'Это поле обязательно*'
+                },
+                validate: {
+                    value: (value) => {
+                        if(
+                            moment(value, 'DD/MM/YYYY hh:mm').fromNow().includes('Invalid date')
+                        ) {
+                            return false
+                        } else {
+                            return true
+                        }
+                    },
+                }
+            })}
             mask="99/99/9999 99:99"
             value={value}
             onChange={onChangeValue}
-            name={id} 
             id={id} 
             type='text' 
             className={styles.classInput}

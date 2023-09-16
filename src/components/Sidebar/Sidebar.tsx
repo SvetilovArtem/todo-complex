@@ -3,16 +3,15 @@ import React from 'react'
 import styles from './sidebar.module.css'
 import { OptionType } from '../../types/types'
 import { useTodos } from '../../store/store'
+import { countItemsCalculate } from '../../helpers/countItemsCalculate'
 
 type PropsType = {
     items: OptionType[],
     selected: OptionType,
     onChange: (el: OptionType) => void,
-    countItems: number,
-    setCountItems: (num: number) => void
 }
 
-const Sidebar = ({items, selected, onChange, countItems, setCountItems}: PropsType) => {
+const Sidebar = ({items, selected, onChange}: PropsType) => {
   const tasks = useTodos(state => state.todos)
   
 
@@ -20,13 +19,7 @@ const Sidebar = ({items, selected, onChange, countItems, setCountItems}: PropsTy
     <ul className={styles.sidebar}>
         {items.map(item => {
 
-          const count = item.title !== 'Все' 
-          ? tasks.filter(task => task.category.title === item.title).length
-          : tasks.length
-
-          setCountItems(item.title !== 'Все' 
-          ? tasks.filter(task => task.category.title === item.title).length
-          : tasks.length)
+          const count = countItemsCalculate(tasks, item)
 
           const optionClass = selected.title === item.title ? styles.option + ' ' + styles.selected : styles.option
           
