@@ -34,7 +34,7 @@ const Tasks = ({ tasks, filter }: PropsType) => {
               <Task key={task.id} task={task} onChangeCompleted={toggleCompleted} onDelete={onDelete} />
             )
           }
-          {!count && <span>Нет записей</span>}
+          {!count && <span className={styles.noTasks}>Нет записей</span>}
       </ul>
     </TransitionGroup>
   )

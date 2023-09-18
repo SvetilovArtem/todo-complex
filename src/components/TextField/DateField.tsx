@@ -9,6 +9,7 @@ type PropsType = {
     id: string,
     error: any,
     label: string,
+    name: string,
     required: boolean,
     value: string,
     setValue: (str: string) => void,
@@ -19,6 +20,7 @@ const DateField = ({
     id, 
     error, 
     label, 
+    name,
     required, 
     value, 
     setValue,
@@ -37,7 +39,7 @@ const DateField = ({
             required && <span className={styles.inputReq}>Required</span>
         }
         <MaskedInput
-            {...register("date", {
+            {...register(name, {
                 required: {
                     value: true,
                     message: 'Это поле обязательно*'

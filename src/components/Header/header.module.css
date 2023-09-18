@@ -10,6 +10,16 @@
     height: 60px;
 }
 
+.links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.currUser {
+    color: #fff;
+}
+
 .link {
     color: #fff;
     font-size: 18px;

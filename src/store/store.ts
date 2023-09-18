@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import {persist} from 'zustand/middleware'
-import { CommentType, TaskType } from "../types/types";
+import { CommentType, TaskType, UserType } from "../types/types";
 
 type TodosState = {
     todos: TaskType[],
@@ -11,26 +11,18 @@ type TodosState = {
     addComment: (id: string, comment: CommentType) => void
 }
 
+type AuthState = {
+    users: UserType[],
+    currentUser: UserType | null,
+    setUsers: (user: UserType) => void,
+    setCurrUser: (user: UserType) => void
+}
+
 export const useTodos = create<TodosState>()(
     persist(
         (set, get) => (
             {
-                todos: [
-                    {
-                        id: '34bee490-52c3-11ee-89b5-97afa677a513', 
-                        title: 'Попасть на стажировку в Acits', 
-                        isDone: false, 
-                        category: {color: 'blue', title: 'Работа', value: 'Работа'}, 
-                        createdAt: 'September 14th 2023, 8:54:45 am',
-                        comments: [
-                            {
-                                text: 'Это реальная возможность получить опыт командной разработки на React.', 
-                                createdDate: 'September 14th 2023, 11:37:31 am', 
-                                author: 'Artem'
-                            }
-                        ]
-                    }
-                ],
+                todos: [],
                 loading: false,
                 addTodo: (todo) => set(state => {
                     return { todos: [...state.todos, todo] }
@@ -57,6 +49,26 @@ export const useTodos = create<TodosState>()(
         {
             name: 'todos'
         }
+    )
+)
+
+export const useAuth = create<AuthState>()(
+    persist(set => ({
+        users: [],
+        currentUser: null,
+        setUsers: (user: UserType) => set(state => {
+            return {
+                users: [...state.users, user]
+            }
+        }),
+        setCurrUser: (user: UserType) => set(state => {
+            return {
+                currentUser: user
+            }
+        })
+    }
+    ),
+    {name: 'auth'}
     )
 )
 

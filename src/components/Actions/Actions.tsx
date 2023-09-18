@@ -40,6 +40,8 @@ const Actions = ({task, isOpen, onEdit, onDelete, setHeight}: PropsType) => {
         addComment(task.id, newComment)
         setText('')
     }
+
+    const disabled = !text.length
     
   return (
     <div id='actionsWrapper' className={styles.actionsWrapper}>
@@ -51,7 +53,7 @@ const Actions = ({task, isOpen, onEdit, onDelete, setHeight}: PropsType) => {
                     className={styles.textarea} 
                     placeholder='Комментарий'
                 ></textarea>
-                <Button onClick={addCommentHandler}/>
+                <Button disabled={disabled} onClick={addCommentHandler}/>
             </form>
             <span className={fromNowClass}>{fromNow}</span>
         </div>

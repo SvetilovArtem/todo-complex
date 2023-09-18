@@ -12,9 +12,12 @@
     overflow: hidden;
     border-radius: 6px;
 }
+.button:disabled {
+    background-color: #999;
+    cursor: default;
+}
 .button::before {
     --size: 0;
-
     content: '';
     position: absolute;
     left: var(--x);
@@ -25,9 +28,16 @@
     transform: translate(-50%, -50%);
     transition: width .2s ease, height .2s ease;
 }
+.button:disabled::before {
+    background: #999;
+}
   
 .button:hover::before {
 --size: 400px;
+}
+
+.button:active {
+    transform: scale(0.93);
 }
 
 span {

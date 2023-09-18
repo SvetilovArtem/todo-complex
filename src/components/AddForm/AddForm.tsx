@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { useTodos } from '../../store/store'
+import { useAuth, useTodos } from '../../store/store'
 import moment from 'moment'
 import { v1 } from 'uuid'
 
@@ -19,6 +19,8 @@ const AddForm = () => {
 
   const {register, handleSubmit, formState: { errors }} = useForm()
 
+    const currUser = useAuth(state => state.currentUser)
+
     const addTodo = useTodos(state => state.addTodo)
     const [todoValue, setTodoValue] = useState<string>('')
     const [deadline, setDeadline] = useState('')
@@ -35,22 +37,27 @@ const AddForm = () => {
         createdAt: time, 
         deadline: deadline,
         comments: [],
+        author: currUser
       }
-      console.log(errors)
       addTodo(newTask)
     }
+
+    console.log(errors)
+
+    const disabled = Boolean(errors.task?.message || errors.deadline?.message)
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(addTodoHandler)}>
         <TextField 
           id='task' 
-          className='field' 
-          error='' 
+          name="task"
+          error={errors.task?.message} 
           type={'text'} 
           label={'Название дела'} 
-          required={false} 
           value={todoValue} 
           setValue={setTodoValue}  
+          register={register}
+          pattern={".*"}
         />
         <Select 
           items={categoies} 
@@ -63,14 +70,15 @@ const AddForm = () => {
         <DateField
           id='deadline' 
           label={'Крайний срок'} 
+          name='deadline'
           required={false} 
           value={deadline} 
           setValue={setDeadline} 
-          error={errors.date && (errors.date?.message || 'Error!')} 
+          error={errors.deadline?.message} 
           register={register}
         />
 
-        <Button onClick={addTodoHandler} />
+        <Button onClick={addTodoHandler} disabled={disabled} />
     </form>
   )
 }

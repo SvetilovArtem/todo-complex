@@ -1,51 +1,60 @@
 import React, { ChangeEventHandler } from 'react'
 
 import styles from './textField.module.css'
+import { FieldValues, UseFormRegister } from 'react-hook-form'
 
-type InputType = 'text' | 'checkbox' | 'password'
+type InputType = 'text' | 'password' | 'email'
 
 type PropsType = {
     id: string,
     type: InputType,
-    className: string,
-    error: string,
+    name: string,
+    error: any,
     label: string,
-    required: boolean,
     value: string,
-    setValue: (str: string) => void
+    setValue: (str: string) => void,
+    pattern: any,
+    register: UseFormRegister<FieldValues> 
 }
 
 const TextField = ({
     id, 
     type, 
-    className, 
+    name,
     error, 
     label, 
-    required, 
     value, 
-    setValue}: PropsType) => {
+    setValue,
+    pattern,
+    register}: PropsType) => {
 
     const onChangeValue: ChangeEventHandler<HTMLInputElement> = (e) => {
         setValue(e.target.value)
     }
-
-    let classInput = className
 
   return (
     <div className={styles.inputWrapper}> 
         {
             label && <label htmlFor={id} className={styles.inputLabel}>{label}</label>
         }
-        {
-            required && <span className={styles.inputReq}>Required</span>
-        }
         <input 
+            {...register(name, {
+                required: {
+                    value: true,
+                    message: 'Это поле обязательно*'
+                },
+                pattern: {
+                    value: pattern,
+                    message: 'Проверьте введенные данные*'
+                }
+            })}
             name={id}
             id={id}
             type={type}
             value={value}
             onChange={onChangeValue}
             className={styles.classInput}
+
         />
         {
             error && <span className={styles.inputError}>{ error }</span>

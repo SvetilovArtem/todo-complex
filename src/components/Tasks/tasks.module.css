@@ -4,3 +4,8 @@
     flex-direction: column;
     gap: 20px;
 }
+
+.noTasks {
+    text-align: center;
+    font-size: 22px;
+}

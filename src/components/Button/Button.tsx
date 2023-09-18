@@ -3,10 +3,11 @@ import React from 'react'
 import styles from './button.module.css'
 
 type PropsType = {
-  onClick: (e: any) => void
+  onClick: (e: any) => void,
+  disabled: boolean
 }
 
-const Button = ({onClick}: PropsType) => {
+const Button = ({onClick, disabled}: PropsType) => {
     const onMousemoveHandler = (e:any) => {
 
         const x = e.pageX - e.target.offsetLeft
@@ -18,7 +19,7 @@ const Button = ({onClick}: PropsType) => {
     }
 
   return (
-    <button className={styles.button} onMouseMove={onMousemoveHandler} onClick={onClick}>
+    <button className={styles.button} onMouseMove={onMousemoveHandler} onClick={onClick} disabled={disabled}>
         <span>Добавить</span>
     </button>
   )
