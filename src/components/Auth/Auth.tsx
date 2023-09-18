@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom'
 
-import { useAuth } from '../store/store'
+import { useAuth } from '../../store/store'
 
-import TextField from '../components/TextField/TextField'
-import Button from '../components/Button/Button'
+import TextField from '../TextField/TextField'
+import Button from '../Button/Button'
+import Notification from '../Notification/Notification'
 
 import styles from './auth.module.css'
 // const initialState = {
@@ -24,6 +25,8 @@ const Auth = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
 
+    const [showNotification, setShowNotification] = useState({ isShow: false, message: '', status: false })
+
     const disabled = Boolean(errors.login?.message || errors.password?.message)
 
     // const [state, setState] = useState(initialState)
@@ -35,20 +38,24 @@ const Auth = () => {
     // }
 
     const authHandler = () => {
-        console.log('auth submit')
         if(users.some(user => user.login === login && user.password === password)) {
             console.log('Авторизация прошла успешно')
             const currUser = users.find(user => user.login === login)
             if(currUser) {
                 setCurrUser(currUser)
                 navigate('/todolist')
+                setShowNotification({ isShow: true, message: 'Авторизация прошла успешно.', status: true })
             }
             
         } else {
             console.log('Проверьте логин и пароль')
+            setShowNotification({ isShow: true, message: 'Проверьте логин и пароль.', status: false })
+            
         }
+        
     }
-    console.log(errors)
+    console.log(showNotification)
+    // console.log(errors)
   return (
     <form className={styles.form} onSubmit={handleSubmit(authHandler)}>
         <h2>Авторизация</h2>
@@ -78,6 +85,11 @@ const Auth = () => {
         <NavLink to={'/register'} className={styles.link}>
             Нет аккаунта?<br/> Зарегистрируйтесь!
         </NavLink>
+        <Notification 
+            message={showNotification.message} 
+            isShow={showNotification.isShow} 
+            isOk={showNotification.status}
+        />
     </form>
   )
 }

@@ -1,0 +1,29 @@
+.notification {
+    background-color: white;
+    padding: 25px 10px;
+    width: 350px;
+    height: 175px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform: scale(0);
+    opacity: 0;
+    transition: all .4s ease;
+    z-index: 20;
+}
+
+.symbol {
+    color: green
+}
+
+.badSymbol {
+    color: red;
+}
+
+.active {
+    transform: scale(1);
+    opacity: 1;
+    z-index: 20;
+  }

@@ -5,14 +5,21 @@ import Header from '../Header/Header'
 import { useAuth } from '../../store/store'
 
 type PropsType = {
-    children: React.ReactNode
+    children: React.ReactNode,
+    openAdminPanel: () => void,
+    isOpenPanel: boolean
 }
 
-const Layout = ({ children }: PropsType) => {
+const Layout = ({ children, openAdminPanel, isOpenPanel }: PropsType) => {
   const {currentUser, setCurrUser} = useAuth()
   return (
     <div className={styles.layout}>
-        <Header currUser={currentUser} setCurrUser={setCurrUser} />
+        <Header 
+          currUser={currentUser} 
+          setCurrUser={setCurrUser} 
+          openAdminPanel={openAdminPanel} 
+          isOpenPanel={isOpenPanel}
+        />
         <div className={styles.content}>
             { children }
         </div>

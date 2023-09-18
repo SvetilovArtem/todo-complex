@@ -3,13 +3,16 @@ import { NavLink } from 'react-router-dom'
 
 import styles from './header.module.css'
 import { UserType } from '../../types/types'
+import AdminPanel from '../AdminPanel/AdminPanel'
 
 type PropsType = {
     currUser: UserType | null,
-    setCurrUser: (currUser: any) => void
+    setCurrUser: (currUser: any) => void,
+    openAdminPanel: () => void,
+    isOpenPanel: boolean
 }
 
-const Header = ({currUser, setCurrUser}: PropsType) => {
+const Header = ({currUser, setCurrUser, openAdminPanel, isOpenPanel}: PropsType) => {
   return (
     <header className={styles.header}>
         <NavLink to='/todolist' className={styles.link}>
@@ -22,7 +25,7 @@ const Header = ({currUser, setCurrUser}: PropsType) => {
             </div>
         </NavLink>
         <div className={styles.links}>
-            {currUser && <span className={styles.currUser}>{currUser.login} </span>}
+            {currUser && <div className={styles.currUser} onClick={openAdminPanel}>{currUser.login} </div>}
             {
                 currUser ? 
                 <NavLink to={'/'} className={styles.link} onClick={() => setCurrUser(null)}>
@@ -37,6 +40,7 @@ const Header = ({currUser, setCurrUser}: PropsType) => {
                 Статистика
             </NavLink>
         </div>
+        <AdminPanel currentUser={currUser} isOpen={isOpenPanel} />
     </header>
   )
 }
